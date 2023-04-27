@@ -1,11 +1,17 @@
 from flask import Flask, render_template
 import smtplib, ssl
 
+emplacement = "data.txt"
+
 app = Flask(__name__)
 
 @app.route('/')
-def pixel_art():
-    return render_template('page.html')
+def alarme():
+    f = open(emplacement, "r")
+    file = f.readlines()
+    
+    return render_template('page.html', file=file)
+    
 
 
 # port = 465  # For SSL
