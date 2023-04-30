@@ -9,8 +9,18 @@ app = Flask(__name__)
 def alarme():
     f = open(emplacement, "r")
     file = f.readlines()
+    f.close()
     
-    return render_template('page.html', file=file)
+    alarmeno1 = file[-1].split(" ")         # 5 derniere alert seront afficher sur le site
+    alarmeno2 = file[-1-1].split(" ")
+    alarmeno3 = file[-1-2].split(" ")
+    alarmeno4 = file[-1-3].split(" ")
+    alarmeno5 = file[-1-4].split(" ")
+
+    
+
+
+    return render_template('page.html', date1 = alarmeno1[0], heure1 = alarmeno1[1], distance1 = alarmeno1[2], date2 = alarmeno2[0], heure2 = alarmeno2[1], distance2 = alarmeno2[2], date3 = alarmeno3[0], heure3 = alarmeno3[1], distance3 = alarmeno3[2], date4 = alarmeno4[0], heure4 = alarmeno4[1], distance4 = alarmeno4[2], date5 = alarmeno5[0], heure5 = alarmeno5[1], distance5 = alarmeno5[2])
     
 
 
@@ -40,4 +50,4 @@ with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
     print("L'e-mail a été envoyé avec succès!")
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
